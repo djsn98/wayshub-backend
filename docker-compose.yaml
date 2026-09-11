@@ -1,0 +1,27 @@
+version: '4'
+services:
+  wayshub-backend:
+    container_name: wayshub-backend
+    restart: on-failure
+    image: djsn98/wayshub-be:prod
+    stdin_open: true
+    ports:
+      - 5000:5000
+    depends_on:
+      - wayshub-database
+  wayshub-database:
+    image: mysql:8.0
+    container_name: wayshub-database
+    environment:
+      MYSQL_ROOT_PASSWORD: rootroot
+      MYSQL_DATABASE: wayshub
+      MYSQL_USER: student
+      MYSQL_PASSWORD: studentstudent
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./initdb:/docker-entrypoint-initdb.d
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf:ro
+volumes:
+  mysql_data:

@@ -1,0 +1,5 @@
+CREATE USER IF NOT EXISTS 'student'@'172.17.%' IDENTIFIED BY 'studentstudent';
+
+GRANT ALL PRIVILEGES ON wayshub.* TO 'student'@'172.17.%';
+
+FLUSH PRIVILEGES;
